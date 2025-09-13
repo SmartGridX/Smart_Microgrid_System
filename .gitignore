@@ -1,0 +1,16 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Pytest cache
+.pytest_cache/
+
+# Docker files (optional, if you want to ignore local images)
+*.log
