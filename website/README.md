@@ -56,6 +56,7 @@ docker run -d -p 8080:80 my-website
 ```
 
 ### 📂 Project Structure
+```text
 website/
 │── index.html        # Homepage
 │── problem.html      # Problem Statement page
@@ -64,3 +65,4 @@ website/
 │── script.js         # JavaScript logic
 │── Dockerfile        # Docker build instructions
 │── docker-compose.yml # Compose configuration
+```
