@@ -35,11 +35,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t my-website .
+        run: docker build -t my-website website/
 
       - name: Run Docker container
         run: |
           docker run -d --name my-website-test -p 8080:80 my-website
           # check if container is running
-          docker ps | grep my-website-test
+          docker ps -q -f name=my-website-test || exit 1
           docker rm -f my-website-test
