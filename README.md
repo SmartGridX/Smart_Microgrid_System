@@ -44,15 +44,6 @@ This project helps promote **efficient energy usage**, **early detection of issu
 
 ---
 
-## 🔗 API Endpoints
-
-- User Management
-- Device Management
-- Sensor Data
-- Alerts & Notifications
-- Dashboard APIs
-
----
 
 ### Summary
 
