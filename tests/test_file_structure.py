@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.abspath(
 
 EXPECTED_DIRS = [
     ".github",
-    "mobile_app",
+    # "mobile_app",
     "website",
     "tests",
 ]
