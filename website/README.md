@@ -58,11 +58,18 @@ docker run -d -p 8080:80 my-website
 ### 📂 Project Structure
 ```text
 website/
-│── index.html        # Homepage
-│── problem.html      # Problem Statement page
-│── developers.html   # Developers page
-│── styles.css        # Stylesheet
-│── script.js         # JavaScript logic
+│── assets
+    │── dev_img        # Images of Developers
+    │── logo.jpg        # Logo of Project
+│── scripts   # scripting Files
+    │── script.js         # JavaScript logic
+│── Struct        # Structures
+    │── dev.html        # Homepage
+    │── features.html        # Homepage
+│── styles        # Stylesheet Files
+    │── styles.css        # Stylesheet logic
 │── Dockerfile        # Docker build instructions
+│── index.html        # Homepage
+│── README.md        # Readme File
 │── docker-compose.yml # Compose configuration
 ```
