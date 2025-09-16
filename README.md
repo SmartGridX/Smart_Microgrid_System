@@ -44,7 +44,6 @@ This project provides a *cloud-based microgrid monitoring solution* using IoT de
         |
         |--- Writes → Time-series DB (InfluxDB / TimescaleDB)
         |--- Writes → SQL DB (PostgreSQL for Users/Devices/Alerts)
-        |
         v
    API Layer (REST/GraphQL, behind Load Balancer)
         |
