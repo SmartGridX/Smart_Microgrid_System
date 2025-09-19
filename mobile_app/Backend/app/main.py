@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
-from app.database.config import engine, Base
-from app.database.init_db import init_db
+from database.config import engine, Base
+from database.init_db import init_db
+from routes import user_routes , auth_routes
 
 
 @asynccontextmanager
@@ -15,6 +16,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Microgrid Monitoring Backend", lifespan=lifespan)
 
-@app.get("/")
-def health_check():
-    return {"status": "Backend running, DB initialized"}
+
+app.include_router(auth_routes.router)
+app.include_router(user_routes.router)
