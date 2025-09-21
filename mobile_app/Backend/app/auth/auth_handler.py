@@ -17,14 +17,22 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 def encode_jwt(user_id: int) -> str:
     payload = {
-        "sub": user_id,
+        # "sub": user_id,
+        "sub": str(user_id),
         "exp": datetime.utcnow() + timedelta(hours=1)
     }
-    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    return token
 
 def decode_jwt(token: str):
     try:
         decoded = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return decoded if decoded["exp"] >= time.time() else None
-    except Exception:
-        raise HTTPException(status_code=401, detail="Invalid or expired token")
+        # return decoded if decoded["exp"] >= time.time() else None
+    # except Exception:
+    #     raise HTTPException(status_code=401, detail="Invalid or expired token")
+        return decoded
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token has expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid Token")
+    

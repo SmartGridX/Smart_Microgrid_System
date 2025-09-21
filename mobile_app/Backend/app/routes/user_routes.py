@@ -28,6 +28,11 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 @router.get("/me", response_model=UserOut)
 def read_me(current_user=Depends(user_controller.get_current_user)):
     return current_user
+    # return {
+    #     "id": current_user.user_id,  # map user_id -> id
+    #     "name": current_user.name,
+    #     "email": current_user.email
+    # }
 
 # Get all users
 @router.get("/", response_model=list[UserOut])
@@ -41,6 +46,11 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+    # return {
+    #     "id": user.user_id,  # map user_id -> id
+    #     "name": user.name,
+    #     "email": user.email
+    # }
 
 # Delete a user
 @router.delete("/{user_id}")

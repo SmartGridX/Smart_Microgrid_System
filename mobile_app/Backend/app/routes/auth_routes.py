@@ -5,6 +5,7 @@ from database.config import SessionLocal
 from schemas.user import UserCreate
 from controllers import user_controller
 from auth.auth_handler import verify_password, encode_jwt
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -25,11 +26,14 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login")
 def login(user: UserCreate, db: Session = Depends(get_db)):
+
     db_user = user_controller.get_user_by_email(db, user.email)
+
     if not db_user or not verify_password(user.password, str(db_user.password)):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    user_id: int = cast(int, db_user.user_id)
+    # user_id: int = cast(int, db_user.user_id)
+    user_id: int = db_user.user_id
     token = encode_jwt(user_id)
 
     return {"access_token": token, "token_type": "bearer"}

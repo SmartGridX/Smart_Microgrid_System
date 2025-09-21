@@ -44,15 +44,31 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         sub = payload.get("sub")
         if sub is None:
             raise credentials_exception
+        
         user_id: int = int(sub)
         if user_id is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    user = db.query(models.User).filter(models.User.id == user_id).first()
+    # user = db.query(models.User).filter(models.User.id == user_id).first()
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if user is None:
         raise credentials_exception
     return user
+
+    #     try:
+    #         user_id = int(sub)
+    #         user = user = db.query(models.User).filter(models.User.id == user_id).first()
+    #     except ValueError:
+    #         user = user = db.query(models.User).filter(models.User.id == user_id).first()
+        
+    #     if not user:
+    #         raise credentials_exception
+    #     return user
+    # except HTTPException:
+    #     # just re-raise any exceptions from decode_jwt
+    #     raise
+
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
@@ -60,10 +76,12 @@ def get_users(db: Session):
     return db.query(models.User).all()
 
 def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
+    # return db.query(models.User).filter(models.User.id == user_id).first()
+    return db.query(models.User).filter(models.User.user_id == user_id).first()
 
 def delete_user(db: Session, user_id: int):
-    user = db.query(models.User).filter(models.User.id == user_id).first()
+    # user = db.query(models.User).filter(models.User.id == user_id).first()
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if user:
         db.delete(user)
         db.commit()
