@@ -33,7 +33,7 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     # user_id: int = cast(int, db_user.user_id)
-    user_id: int = db_user.user_id
+    user_id: int = cast(int, db_user.user_id)
     token = encode_jwt(user_id)
 
     return {"access_token": token, "token_type": "bearer"}
