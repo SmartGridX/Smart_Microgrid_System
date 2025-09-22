@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sms_app/widgets/feature_card.dart';
 import 'package:sms_app/widgets/hompage_card.dart';
+import 'package:sms_app/widgets/profile_sidebar.dart';
 
 // Custom FeatureCard widget
 
@@ -10,6 +11,17 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Adding a Drawer
+      endDrawer: ProfileSidebar(
+        username: "Pritam",
+        profileImage:
+            "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg",
+        onLogout: () {
+          debugPrint("Logout tapped");
+          Navigator.pop(context); // Close drawer
+        },
+      ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -29,12 +41,16 @@ class HomePage extends StatelessWidget {
                         color: Colors.green.shade500,
                       ),
                     ),
-                    SizedBox(
-                      height: 32,
-                      width: 32,
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg",
+                    Builder(
+                      builder: (context) => GestureDetector(
+                        onTap: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                        child: const CircleAvatar(
+                          radius: 16,
+                          backgroundImage: NetworkImage(
+                            "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg",
+                          ),
                         ),
                       ),
                     ),
