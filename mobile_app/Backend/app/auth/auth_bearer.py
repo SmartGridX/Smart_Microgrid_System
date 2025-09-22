@@ -10,7 +10,7 @@ class JWTBearer(HTTPBearer):
         super().__init__(auto_error=auto_error)
 
     # Note: return type is Optional[...] to match HTTPBearer.__call__ signature
-    async def __call__(self, request: Request) -> str:
+    async def __call__(self, request: Request):
         # Call parent's __call__ which returns Optional[HTTPAuthorizationCredentials]
         credentials: Optional[HTTPAuthorizationCredentials] = await super(JWTBearer, self).__call__(request)
 
@@ -25,7 +25,7 @@ class JWTBearer(HTTPBearer):
         else:
             raise HTTPException(status_code=403, detail="Invalid authorization code.")
 
-    def verify_jwt(self, jwtoken: str) -> bool:
+    def verify_jwt(self, jwtoken: str):
         try:
             payload = jwt.decode(jwtoken, SECRET_KEY, algorithms=[ALGORITHM])
             return payload.get("sub")

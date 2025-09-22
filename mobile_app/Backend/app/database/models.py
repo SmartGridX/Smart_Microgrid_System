@@ -54,6 +54,8 @@ class SensorData(Base):
 
     sensor = relationship("Sensor", back_populates="data")
 
+
+
 # 3. Alerts & Control
 class Alert(Base):
     __tablename__ = "alerts"
@@ -71,3 +73,13 @@ class ControlCommand(Base):
     command = Column(String(50))
     status = Column(String(20), default="pending")
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
+# 4 Energy Sorces
+class EnergySource(Base):
+    __tablename__ = "energy_sources"
+    source_id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False)
+    type = Column(String(50))  # e.g., solar, wind, battery
+    capacity_kw = Column(Float)  # capacity in kilowatts
+    location = Column(String(100))
+    status = Column(String(20), default="inactive")
+    last_maintenance = Column(DateTime(timezone=True))
