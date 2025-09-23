@@ -46,14 +46,14 @@ class _HomePageState extends State<HomePage> {
         profileImage:
             "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg",
         onLogout: () {
-              // Clear user session or token here if applicable
-              // Navigate to WelcomeScreen and remove all previous routes
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-                (route) => false,
-              );
-            },
+          // Clear user session or token here if applicable
+          // Navigate to WelcomeScreen and remove all previous routes
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+            (route) => false,
+          );
+        },
       ),
       body: body,
       bottomNavigationBar: BottomNav(
@@ -250,17 +250,6 @@ Widget _buildFeatureList(BuildContext context) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const WeatherPage()),
-            );
-          },
-        ),
-        const SizedBox(width: 16),
-        FeatureCard(
-          icon: Icons.wb_sunny,
-          label: "Forecast",
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const ForecastPage()),
             );
           },
         ),
