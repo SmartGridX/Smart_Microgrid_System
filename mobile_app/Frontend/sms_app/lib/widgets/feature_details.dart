@@ -150,7 +150,11 @@ Widget _notificationCard(String message) {
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(Icons.warning, color: Color.fromARGB(255, 125, 152, 4), size: 28),
+        const Icon(
+          Icons.warning,
+          color: Color.fromARGB(255, 125, 152, 4),
+          size: 28,
+        ),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
@@ -436,85 +440,68 @@ class _WeatherPageState extends State<WeatherPage> {
               ),
 
               const SizedBox(height: 24),
-
-              // Breaking News
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Text(
-                  "Breaking News: US Needs To Keep Eye On Tropics",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 24),
               const Text(
                 "Daily Forecast",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               SizedBox(height: 8),
 
+              _dailyForecastTableHeader(),
               _dailyForecastRow(
                 "Yesterday",
                 "Cloudy",
+                Icons.wb_cloudy,
                 "32° / 26°",
                 "5.1 kWh",
-                Icons.wb_cloudy,
               ),
               _dailyForecastRow(
                 "Today",
                 "Sunny",
+                Icons.wb_sunny,
                 "32° / 25°",
                 "6.2 kWh",
-                Icons.wb_sunny,
               ),
               _dailyForecastRow(
                 "Wednesday",
                 "Cloudy",
+                Icons.cloud,
                 "32° / 24°",
                 "4.9 kWh",
-                Icons.cloud,
               ),
               _dailyForecastRow(
                 "Thursday",
                 "Sunny",
+                Icons.wb_sunny,
                 "32° / 25°",
                 "6.5 kWh",
-                Icons.wb_sunny,
               ),
               _dailyForecastRow(
                 "Friday",
                 "Partly Cloudy",
+                Icons.wb_cloudy,
                 "34° / 26°",
                 "5.8 kWh",
-                Icons.wb_cloudy,
               ),
               _dailyForecastRow(
                 "Saturday",
                 "Sunny",
+                Icons.wb_sunny,
                 "34° / 26°",
                 "7.1 kWh",
-                Icons.wb_sunny,
               ),
               _dailyForecastRow(
                 "Sunday",
                 "Rain",
+                Icons.beach_access,
                 "34° / 26°",
                 "3.6 kWh",
-                Icons.beach_access,
               ),
               _dailyForecastRow(
                 "Monday",
                 "Storm",
+                Icons.bolt,
                 "32° / 25°",
                 "2.8 kWh",
-                Icons.bolt,
               ),
             ],
           ),
@@ -524,68 +511,98 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 }
 
-// Daily forecast row with energy info
+// ---------------- Daily Forecast Header ----------------
+Widget _dailyForecastTableHeader() {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    decoration: BoxDecoration(
+      color: Colors.grey.shade400,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: const [
+        SizedBox(
+          width: 100,
+          child: Text(
+            "Day",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        SizedBox(
+          width: 100,
+          child: Text(
+            "Description",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        SizedBox(
+          width: 70,
+          child: Text(
+            "Temp",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        SizedBox(
+          width: 70,
+          child: Text(
+            "Energy",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// ---------------- Daily Forecast Row ----------------
 Widget _dailyForecastRow(
   String day,
   String desc,
+  IconData icon,
   String temp,
   String energy,
-  IconData icon,
 ) {
   return Container(
-    margin: const EdgeInsets.symmetric(vertical: 6),
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    decoration: BoxDecoration(
+      color: Colors.grey.shade200,
+      borderRadius: BorderRadius.circular(12),
+    ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Day + weather info
-        Row(
-          children: [
-            Icon(icon, color: const Color.fromARGB(255, 0, 0, 0), size: 28),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  day,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  desc,
-                  style: const TextStyle(
-                    color: Color.fromARGB(179, 0, 0, 0),
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-          ],
+        SizedBox(
+          width: 100,
+          child: Text(day, style: const TextStyle(fontWeight: FontWeight.bold)),
         ),
-        // Temperature + energy
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              temp,
-              style: const TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+        SizedBox(
+          width: 100,
+          child: Row(
+            children: [
+              Icon(icon, size: 20, color: Colors.orange),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  desc,
+                  style: const TextStyle(color: Colors.black54),
+                ),
               ),
-            ),
-            Text(
-              energy,
-              style: const TextStyle(
-                color: Color.fromARGB(255, 230, 175, 11),
-                fontSize: 13,
-              ),
-            ),
-          ],
+            ],
+          ),
+        ),
+        SizedBox(
+          width: 70,
+          child: Text(
+            temp,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(
+          width: 70,
+          child: Text(energy, style: const TextStyle(color: Colors.green)),
         ),
       ],
     ),
@@ -622,193 +639,9 @@ Widget _hourlyForecast(String time, String temp, IconData icon) {
   );
 }
 
-// // -------------------------------------------------
-// // ---------------- Forecast Page ----------------
-// class ForecastPage extends StatefulWidget {
-//   const ForecastPage({super.key});
-
-//   @override
-//   State<ForecastPage> createState() => _ForecastPageState();
-// }
-
-// class _ForecastPageState extends State<ForecastPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text("Forecast")),
-//       body: SingleChildScrollView(
-//         padding: const EdgeInsets.all(16),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             /// 🔹 Summary Cards Row
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: const [
-//                 _SummaryCard(
-//                   title: "Solar Output",
-//                   value: "120 kWh",
-//                   icon: Icons.wb_sunny,
-//                   color: Colors.orange,
-//                 ),
-//                 _SummaryCard(
-//                   title: "Predicted Demand",
-//                   value: "95 kWh",
-//                   icon: Icons.flash_on,
-//                   color: Colors.blue,
-//                 ),
-//                 _SummaryCard(
-//                   title: "Battery SOC",
-//                   value: "78%",
-//                   icon: Icons.battery_full,
-//                   color: Colors.green,
-//                 ),
-//               ],
-//             ),
-
-//             const SizedBox(height: 20),
-
-//             /// 🔹 Demand vs Supply Forecast (Chart Placeholder)
-//             _SectionTitle("Demand vs Supply Forecast (Next 24h)"),
-//             _ChartPlaceholder(),
-
-//             const SizedBox(height: 20),
-
-//             /// 🔹 Battery SOC Prediction
-//             _SectionTitle("Battery SOC Forecast"),
-//             _ChartPlaceholder(),
-
-//             const SizedBox(height: 20),
-
-//             /// 🔹 Cost Savings Forecast
-//             _SectionTitle("Cost Savings (Next 7 Days)"),
-//             _ChartPlaceholder(),
-
-//             const SizedBox(height: 20),
-
-//             /// 🔹 Carbon Savings
-//             _SectionTitle("Carbon Savings"),
-//             Container(
-//               width: double.infinity,
-//               padding: const EdgeInsets.all(16),
-//               decoration: BoxDecoration(
-//                 color: Colors.green.shade100,
-//                 borderRadius: BorderRadius.circular(12),
-//               ),
-//               child: const Text(
-//                 "Estimated CO₂ Reduction: 25 kg for next week",
-//                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-//               ),
-//             ),
-
-//             const SizedBox(height: 20),
-
-//             /// 🔹 Alerts / Recommendations
-//             _SectionTitle("Recommendations"),
-//             Container(
-//               width: double.infinity,
-//               padding: const EdgeInsets.all(16),
-//               decoration: BoxDecoration(
-//                 color: Colors.yellow.shade100,
-//                 borderRadius: BorderRadius.circular(12),
-//               ),
-//               child: const Text(
-//                 "⚠️ High demand expected tomorrow evening. "
-//                 "Ensure battery is charged to 80% by 5 PM.",
-//                 style: TextStyle(fontSize: 15),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// /// 🔹 Reusable Summary Card
-// class _SummaryCard extends StatelessWidget {
-//   final String title;
-//   final String value;
-//   final IconData icon;
-//   final Color color;
-
-//   const _SummaryCard({
-//     required this.title,
-//     required this.value,
-//     required this.icon,
-//     required this.color,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: Card(
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-//         child: Padding(
-//           padding: const EdgeInsets.all(12),
-//           child: Column(
-//             children: [
-//               Icon(icon, size: 28, color: color),
-//               const SizedBox(height: 6),
-//               Text(
-//                 value,
-//                 style: TextStyle(
-//                   fontSize: 16,
-//                   fontWeight: FontWeight.bold,
-//                   color: color,
-//                 ),
-//               ),
-//               const SizedBox(height: 4),
-//               Text(
-//                 title,
-//                 textAlign: TextAlign.center,
-//                 style: const TextStyle(fontSize: 12),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// /// 🔹 Section Title
-// class _SectionTitle extends StatelessWidget {
-//   final String title;
-//   const _SectionTitle(this.title);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 4),
-//       child: Text(
-//         title,
-//         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//       ),
-//     );
-//   }
-// }
-
-// /// 🔹 Placeholder for charts
-// class _ChartPlaceholder extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 180,
-//       margin: const EdgeInsets.only(top: 8),
-//       decoration: BoxDecoration(
-//         color: Colors.grey.shade200,
-//         borderRadius: BorderRadius.circular(12),
-//         border: Border.all(color: Colors.grey.shade400),
-//       ),
-//       child: const Center(
-//         child: Text("Chart Placeholder", style: TextStyle(color: Colors.grey)),
-//       ),
-//     );
-//   }
-// }
-
+// -------------------------------------------------
 // ---------------- Earnings Page ----------------
+
 class EarningsPage extends StatefulWidget {
   const EarningsPage({super.key});
 
@@ -817,17 +650,173 @@ class EarningsPage extends StatefulWidget {
 }
 
 class _EarningsPageState extends State<EarningsPage> {
+  final List<Map<String, dynamic>> transactions = [
+    {
+      "buyer": "User A",
+      "energy": 5.0, // kWh
+      "status": "Paid",
+      "date": "23 Sep 2025",
+    },
+    {
+      "buyer": "User B",
+      "energy": 3.2,
+      "status": "Pending",
+      "date": "22 Sep 2025",
+    },
+  ];
+
+  final double standardRate = 50; // ₹ per kWh
+
   @override
   Widget build(BuildContext context) {
+    // Total energy generated
+    double totalGeneration = transactions.fold(
+      0.0,
+      (sum, tx) => sum + (tx['energy'] as double),
+    );
+
+    // Total earnings based on standard rate
+    double totalEarnings = totalGeneration * standardRate;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Earnings")),
-      body: const Center(
-        child: Card(
-          margin: EdgeInsets.all(20),
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Text("Earnings details yahan aayenge..."),
-          ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ---------------- Generation & Standard Rate Card ----------------
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total Energy Generated",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "${totalGeneration.toStringAsFixed(2)} kWh",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Standard Rate: ₹$standardRate / kWh",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Total Earnings: ₹${totalEarnings.toStringAsFixed(2)}",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            // ---------------- Transaction Summary Card ----------------
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Surplus Sold: ${totalGeneration.toStringAsFixed(2)} kWh",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Pending Payments: ${transactions.where((tx) => tx['status'] == 'Pending').length}",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            // ---------------- Transactions List ----------------
+            const Text(
+              "Transaction History",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: transactions.length,
+              itemBuilder: (context, index) {
+                final tx = transactions[index];
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.flash_on, color: Colors.orange),
+                    title: Text("${tx['buyer']} - ${tx['energy']} kWh"),
+                    subtitle: Text(
+                      "Date: ${tx['date']} • Rate: ₹$standardRate/kWh",
+                    ),
+                    trailing: Text(
+                      tx['status'].toString(),
+                      style: TextStyle(
+                        color: tx['status'] == 'Paid'
+                            ? Colors.green
+                            : Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

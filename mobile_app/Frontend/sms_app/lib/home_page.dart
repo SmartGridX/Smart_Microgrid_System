@@ -31,10 +31,10 @@ class _HomePageState extends State<HomePage> {
         body = _analyticsContent();
         break;
       case 2:
-        body = _alertsContent();
+        body = _gridContent();
         break;
       case 3:
-        body = _gridContent();
+        body = _alertsContent();
         break;
       default:
         body = _homeContent(context);
@@ -84,6 +84,8 @@ Widget _homeContent(BuildContext context) {
             ),
             SizedBox(height: 16),
             _buildFeatureList(context),
+            SizedBox(height: 16),
+            _buildDeviceDetails(devices),
             SizedBox(height: 20),
             Text(
               "Today's Summary",
@@ -384,6 +386,115 @@ Widget _buildEnergyChartPlaceholder() {
       tooltipBehavior: TooltipBehavior(enable: true),
     ),
   );
+}
+
+Widget _buildDeviceDetails(List<Map<String, dynamic>> devices) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        "Device Details",
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 12),
+      SizedBox(
+        height: 160, // Height for device cards
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: devices.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 12),
+          itemBuilder: (context, index) {
+            final device = devices[index];
+            return Container(
+              width: 220,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Device name & status
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        device['name'],
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        device['icon'],
+                        size: 28,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    "Status: ${getDeviceStatus(device)}",
+                    style: TextStyle(
+                      color: getDeviceStatus(device) == "Active"
+                          ? Colors.green
+                          : (getDeviceStatus(device) == "Warning" ? Colors.orange : Colors.red),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text("Total Sensors: ${device['Total Sensors']}"),
+                  const SizedBox(height: 2),
+                  Text(
+                    "Active Sensors: ${device['Active Sensors']}",
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    "Inactive Sensors: ${device['Inactive Sensors']}",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    ],
+  );
+}
+
+final devices = [
+  {
+    "name": "Device 1",
+    "Total Sensors": 5,
+    "Active Sensors": 3,
+    "Inactive Sensors": 2,
+    "icon": Icons.solar_power,
+  },
+  {
+    "name": "Device 2",
+    "Total Sensors": 10,
+    "Active Sensors": 0,
+    "Inactive Sensors": 10,
+    "icon": Icons.wind_power,
+  },
+];
+
+String getDeviceStatus(Map device) {
+  if ((device['Active Sensors'] ?? 0) == 0) {
+    return "Inactive";
+  } else if ((device['Active Sensors'] ?? 0) < (device['Total Sensors'] ?? 1) / 2) {
+    return "Warning";
+  } else {
+    return "Active";
+  }
 }
 
 //! Bottom Navigation Tabs Content
