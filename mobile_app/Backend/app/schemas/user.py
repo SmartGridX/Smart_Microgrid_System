@@ -5,6 +5,8 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
 
+
+
 class UserOut(BaseModel):
     # id: int
     # The database/SQLAlchemy model has user_id, but in this Pydantic model, I want to call it id.

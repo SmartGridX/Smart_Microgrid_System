@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
+from schemas.device import DeviceBase, DeviceCreate, DeviceOut
 from controllers import device_controller
 from database.models import Device
 from pydantic import BaseModel
@@ -30,17 +30,21 @@ class DeviceUpdate(BaseModel):
     status: Optional[str] = None
 
 # GET /devices → List all devices
-@router.get("/", response_model=List[dict])
+# @router.get("/", response_model=List[dict])
+@router.get("/", response_model=List[DeviceOut])
 def list_devices(db: Session = Depends(get_db)):
-    return device_controller.get_devices(db)
+    devices = device_controller.get_devices(db)
+    return devices
 
 # POST /devices → Add new device
-@router.post("/", response_model=dict)
+# @router.post("/", response_model=dict)
+@router.post("/", response_model=DeviceOut)
 def add_device(data: DeviceCreate, db: Session = Depends(get_db)):
     return device_controller.create_device(db, data.user_id, data.device_name, data.location)
 
 # GET /devices/{id} → Get device details
-@router.get("/{device_id}", response_model=dict)
+# @router.get("/{device_id}", response_model=dict)
+@router.get("/{device_id}", response_model=DeviceOut)
 def get_device(device_id: int, db: Session = Depends(get_db)):
     device = device_controller.get_device(db, device_id)
     if not device:
@@ -48,7 +52,8 @@ def get_device(device_id: int, db: Session = Depends(get_db)):
     return device
 
 # PUT /devices/{id} → Update device
-@router.put("/{device_id}", response_model=dict)
+# @router.put("/{device_id}", response_model=dict)
+@router.put("/{device_id}", response_model=DeviceOut)
 def update_device(device_id: int, data: DeviceUpdate, db: Session = Depends(get_db)):
     updated = device_controller.update_device(db, device_id, data.dict(exclude_unset=True))
     if not updated:

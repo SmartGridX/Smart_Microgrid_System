@@ -13,5 +13,8 @@ class ReadingOut(BaseModel):
     timestamp: datetime
     value: float
 
-    class Config:
-        orm_mode = True
+    # class Config:
+    #     orm_mode = True
+    model_config = {
+        "from_attributes": True  # enables ORM mapping
+    }
