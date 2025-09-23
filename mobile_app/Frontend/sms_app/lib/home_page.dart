@@ -387,7 +387,7 @@ Widget _buildEnergyChartPlaceholder() {
 }
 
 //! Bottom Navigation Tabs Content
-//! change this into antoher file later
+//! change this into another file later
 
 // Analytics tab content
 Widget _analyticsContent() {
