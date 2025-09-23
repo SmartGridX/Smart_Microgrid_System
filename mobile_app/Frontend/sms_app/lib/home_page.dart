@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sms_app/welcome_screen.dart';
 import 'package:sms_app/widgets/feature_card.dart';
+import 'package:sms_app/widgets/feature_details.dart';
 import 'package:sms_app/widgets/hompage_card.dart';
 import 'package:sms_app/widgets/profile_sidebar.dart';
 import 'package:sms_app/widgets/bottom_nav.dart';
@@ -43,7 +45,15 @@ class _HomePageState extends State<HomePage> {
         username: "Pritam",
         profileImage:
             "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg",
-        onLogout: () => Navigator.pop(context),
+        onLogout: () {
+              // Clear user session or token here if applicable
+              // Navigate to WelcomeScreen and remove all previous routes
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+                (route) => false,
+              );
+            },
       ),
       body: body,
       bottomNavigationBar: BottomNav(
@@ -73,7 +83,7 @@ Widget _homeContent(BuildContext context) {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            _buildFeatureList(),
+            _buildFeatureList(context),
             SizedBox(height: 20),
             Text(
               "Today's Summary",
@@ -205,7 +215,7 @@ Widget _buildSearchBar() {
   );
 }
 
-Widget _buildFeatureList() {
+Widget _buildFeatureList(BuildContext context) {
   return SizedBox(
     height: 100,
     child: ListView(
@@ -214,19 +224,56 @@ Widget _buildFeatureList() {
         FeatureCard(
           icon: Icons.battery_4_bar_sharp,
           label: "Battery Health",
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const BatteryPage()),
+            );
+          },
         ),
-        SizedBox(width: 16),
-        FeatureCard(icon: Icons.ac_unit, label: "Efficiency", onTap: () {}),
-        SizedBox(width: 16),
-        FeatureCard(icon: Icons.cloud, label: "Weather", onTap: () {}),
-        SizedBox(width: 16),
-        FeatureCard(icon: Icons.wb_sunny, label: "Forecast", onTap: () {}),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
+        FeatureCard(
+          icon: Icons.ac_unit,
+          label: "Efficiency",
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const EfficiencyPage()),
+            );
+          },
+        ),
+        const SizedBox(width: 16),
+        FeatureCard(
+          icon: Icons.cloud,
+          label: "Weather",
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const WeatherPage()),
+            );
+          },
+        ),
+        const SizedBox(width: 16),
+        FeatureCard(
+          icon: Icons.wb_sunny,
+          label: "Forecast",
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ForecastPage()),
+            );
+          },
+        ),
+        const SizedBox(width: 16),
         FeatureCard(
           icon: Icons.currency_rupee,
           label: "Earnings",
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const EarningsPage()),
+            );
+          },
         ),
       ],
     ),
