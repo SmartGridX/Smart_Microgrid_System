@@ -80,31 +80,37 @@ Widget _homeContent(BuildContext context) {
           children: [
             _buildTopRow(context),
             _buildLocationRow(),
+
             SizedBox(height: 10),
             _buildSearchBar(),
+
             SizedBox(height: 20),
             Text(
               "Features",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+
             SizedBox(height: 16),
             _buildFeatureList(context),
+
             SizedBox(height: 16),
-            _buildDeviceDetails(devices),
-            SizedBox(height: 20),
             Text(
               "Today's Summary",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            _buildSummaryGrid(),
+            _buildSummaryGrid(context),
+
+            SizedBox(height: 20),
+            _buildDeviceDetails(devices),
+
             SizedBox(height: 20),
             Text(
               "Energy Consumption",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            _buildEnergyChartPlaceholder(),
+            _buildEnergyChartPlaceholder(context),
 
             SizedBox(height: 20),
             // Energy Source Breakdown Placeholder
@@ -116,9 +122,11 @@ Widget _homeContent(BuildContext context) {
 
             // Pie chart with only percentage labels
             Container(
-              height: 200,
+              height: MediaQuery.of(context).size.height * 0.22,
+              constraints: BoxConstraints(minHeight: 140, maxHeight: 260),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade100,
+                border: Border.all(color: Colors.grey.shade300, width: 2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: SfCircularChart(
@@ -201,7 +209,9 @@ Widget _buildSearchBar() {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 10),
     decoration: BoxDecoration(
-      color: Colors.grey.shade200,
+      border: Border.all(color: Colors.grey.shade300, width: 2),
+      color: Colors.grey.shade100,
+
       borderRadius: BorderRadius.circular(8),
     ),
     child: Row(
@@ -224,7 +234,7 @@ Widget _buildSearchBar() {
 
 Widget _buildFeatureList(BuildContext context) {
   return SizedBox(
-    height: 100,
+    height: MediaQuery.of(context).size.height * 0.11,
     child: ListView(
       scrollDirection: Axis.horizontal,
       children: [
@@ -276,14 +286,33 @@ Widget _buildFeatureList(BuildContext context) {
   );
 }
 
-Widget _buildSummaryGrid() {
+Widget _buildSummaryGrid(BuildContext context) {
+  // Responsive summary grid
+  final screenWidth = MediaQuery.of(context).size.width;
+  int crossAxisCount;
+  double childAspectRatio;
+
+  if (screenWidth < 400) {
+    crossAxisCount = 1;
+    childAspectRatio = 2.5;
+  } else if (screenWidth < 600) {
+    crossAxisCount = 2;
+    childAspectRatio = 1.3;
+  } else if (screenWidth < 900) {
+    crossAxisCount = 3;
+    childAspectRatio = 1.6;
+  } else {
+    crossAxisCount = 4;
+    childAspectRatio = 1.8;
+  }
+
   return GridView.count(
-    crossAxisCount: 2,
+    crossAxisCount: crossAxisCount,
     shrinkWrap: true,
     physics: NeverScrollableScrollPhysics(),
     crossAxisSpacing: 15,
     mainAxisSpacing: 15,
-    childAspectRatio: 1.3,
+    childAspectRatio: childAspectRatio,
     children: [
       HompageCard(
         title: "Production",
@@ -346,7 +375,7 @@ class _EnergySourceData {
   _EnergySourceData(this.source, this.value);
 }
 
-Widget _buildEnergyChartPlaceholder() {
+Widget _buildEnergyChartPlaceholder(BuildContext context) {
   final List<EnergyData> data = [
     EnergyData(DateTime(2025, 6, 1, 0), 0.6),
     EnergyData(DateTime(2025, 6, 1, 2), 0.5),
@@ -363,10 +392,15 @@ Widget _buildEnergyChartPlaceholder() {
   ];
 
   return Container(
-    height: 200,
+    height: MediaQuery.of(context).size.height * 0.25,
+
+    // Minimum height fallback for very small screens
+    constraints: BoxConstraints(minHeight: 180, maxHeight: 320),
+
     decoration: BoxDecoration(
-      color: Colors.grey.shade200,
+      color: Colors.grey.shade100,
       borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: Colors.grey.shade300, width: 2),
     ),
     child: SfCartesianChart(
       primaryXAxis: DateTimeAxis(
@@ -411,60 +445,64 @@ Widget _buildDeviceDetails(List<Map<String, dynamic>> devices) {
           itemBuilder: (context, index) {
             final device = devices[index];
             return Container(
-              width: 220,
-              padding: const EdgeInsets.all(12),
+              width: MediaQuery.of(context).size.width * 0.6,
+              constraints: BoxConstraints(minWidth: 180, maxWidth: 300),
+
               decoration: BoxDecoration(
-                color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
+                border: Border.all(color: Colors.grey.shade300, width: 2),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Device name & status
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Device name & status
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            device['name'],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(device['icon'], size: 28),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
                       Text(
-                        device['name'],
-                        style: const TextStyle(
-                          fontSize: 16,
+                        "Status: ${getDeviceStatus(device)}",
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: getDeviceStatus(device) == "Active"
+                              ? Colors.green
+                              : (getDeviceStatus(device) == "Warning"
+                                    ? Colors.orange
+                                    : Colors.red),
                         ),
                       ),
-                      Icon(device['icon'], size: 28),
+                      const SizedBox(height: 4),
+                      Text("Total Sensors: ${device['Total Sensors']}"),
+                      const SizedBox(height: 2),
+                      Text(
+                        "Active Sensors: ${device['Active Sensors']}",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        "Inactive Sensors: ${device['Inactive Sensors']}",
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    "Status: ${getDeviceStatus(device)}",
-                    style: TextStyle(
-                      color: getDeviceStatus(device) == "Active"
-                          ? Colors.green
-                          : (getDeviceStatus(device) == "Warning"
-                                ? Colors.orange
-                                : Colors.red),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text("Total Sensors: ${device['Total Sensors']}"),
-                  const SizedBox(height: 2),
-                  Text(
-                    "Active Sensors: ${device['Active Sensors']}",
-                    style: TextStyle(color: Colors.green),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    "Inactive Sensors: ${device['Inactive Sensors']}",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ],
+                ),
               ),
             );
           },

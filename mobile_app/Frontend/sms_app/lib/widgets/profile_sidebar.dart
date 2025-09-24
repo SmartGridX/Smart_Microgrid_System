@@ -59,7 +59,10 @@ class ProfileSidebar extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   ListTile(
-                    leading: Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0)),
+                    leading: Icon(
+                      Icons.person,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
                     title: const Text("My Profile"),
                     onTap: () {
                       Navigator.push(
@@ -74,7 +77,10 @@ class ProfileSidebar extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.settings, color: const Color.fromARGB(255, 0, 0, 0)),
+                    leading: Icon(
+                      Icons.settings,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
                     title: const Text("Settings"),
                     onTap: () {
                       Navigator.push(
@@ -86,7 +92,10 @@ class ProfileSidebar extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.mail, color: const Color.fromARGB(255, 0, 0, 0)),
+                    leading: Icon(
+                      Icons.mail,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
                     title: const Text("Contact Us"),
                     onTap: () {
                       Navigator.push(
@@ -113,7 +122,10 @@ class ProfileSidebar extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.book, color: const Color.fromARGB(255, 0, 0, 0)),
+                    leading: Icon(
+                      Icons.book,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
                     title: const Text("Documentation"),
                     onTap: () {
                       Navigator.push(
@@ -127,26 +139,7 @@ class ProfileSidebar extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Logout Button
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton.icon(
-                onPressed: onLogout,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade600,
-                  minimumSize: const Size(double.infinity, 48),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                icon: const Icon(Icons.logout, color: Colors.white),
-                label: const Text(
-                  "Logout",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-            ),
+            const Divider(),
           ],
         ),
       ),

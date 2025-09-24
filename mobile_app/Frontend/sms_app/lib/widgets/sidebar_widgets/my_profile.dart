@@ -4,7 +4,6 @@ class ProfilePage extends StatelessWidget {
   final String username;
   final String profileImage;
 
-
   const ProfilePage({
     super.key,
     required this.username,
@@ -20,57 +19,63 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             // Profile Header
-            Card(
-              shape: RoundedRectangleBorder(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300, width: 2),
                 borderRadius: BorderRadius.circular(16),
               ),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(profileImage),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            username,
-                            style: const TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            "${username.toLowerCase().replaceAll(' ', '.')}@gmail.com",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            "Microgrid Operator",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                        ],
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(profileImage),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Navigate to edit profile
-                      },
-                      icon: const Icon(Icons.edit, color: Colors.green),
-                    ),
-                  ],
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              username,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "${username.toLowerCase().replaceAll(' ', '.')}@gmail.com",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "Microgrid Operator",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Navigate to edit profile
+                        },
+                        icon: const Icon(Icons.edit, color: Colors.green),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -92,60 +97,75 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Account Info Section
-            Card(
-              shape: RoundedRectangleBorder(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300, width: 2),
                 borderRadius: BorderRadius.circular(16),
               ),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Account Information",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Account Information",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    _InfoRow(label: "Username", value: username),
-                    _InfoRow(
-                      label: "Email",
-                      value:
-                          "${username.toLowerCase().replaceAll(' ', '.')}@gmail.com",
-                    ),
-                    const _InfoRow(label: "Role", value: "Microgrid Operator"),
-                  ],
+                      const SizedBox(height: 12),
+                      _InfoRow(label: "Username", value: username),
+                      _InfoRow(
+                        label: "Email",
+                        value:
+                            "${username.toLowerCase().replaceAll(' ', '.')}@gmail.com",
+                      ),
+                      const _InfoRow(
+                        label: "Role",
+                        value: "Microgrid Operator",
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 24),
 
             // Settings / Actions
-            Card(
-              shape: RoundedRectangleBorder(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300, width: 2),
                 borderRadius: BorderRadius.circular(16),
               ),
-              elevation: 4,
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.lock_outline),
-                    title: const Text("Change Password"),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    onTap: () {},
-                  ),
-                  const Divider(),
-                  ListTile(
-                    leading: const Icon(Icons.logout),
-                    title: const Text("Logout"),
-                    onTap: () {
-                      Navigator.pop(context); // Or call logout logic
-                    },
-                  ),
-                ],
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 0,
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.lock_outline),
+                      title: const Text("Change Password"),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                      onTap: () {},
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: const Icon(Icons.logout),
+                      title: const Text("Logout"),
+                      onTap: () {
+                        Navigator.pop(context); // Or call logout logic
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -158,7 +178,7 @@ class ProfilePage extends StatelessWidget {
     return Expanded(
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 4,
+        elevation: 0,
         color: color,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),

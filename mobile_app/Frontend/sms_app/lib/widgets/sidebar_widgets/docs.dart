@@ -6,9 +6,7 @@ class DocumentationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Documentation"),
-      ),
+      appBar: AppBar(title: const Text("Documentation")),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -57,28 +55,36 @@ class DocumentationPage extends StatelessWidget {
   Widget _buildDocSection({required String title, required String content}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 0, 0, 0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300, width: 2),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                content,
-                style: const TextStyle(fontSize: 14, color: Colors.black87),
-              ),
-            ],
+                const SizedBox(height: 8),
+                Text(
+                  content,
+                  style: const TextStyle(fontSize: 14, color: Colors.black87),
+                ),
+              ],
+            ),
           ),
         ),
       ),

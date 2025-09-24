@@ -33,92 +33,110 @@ class _SettingsPageState extends State<SettingsPage> {
 
           // Notifications Section
           const _SectionTitle(title: "Notifications"),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade300, width: 2),
+              borderRadius: BorderRadius.circular(16),
             ),
-            elevation: 3,
-            child: Column(
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.notifications),
-                  title: const Text("Notification Preferences"),
-                  trailing: Switch(
-                    value: pushNotifications,
-                    onChanged: (val) {
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.notifications),
+                    title: const Text("Notification Preferences"),
+                    trailing: Switch(
+                      value: pushNotifications,
+                      onChanged: (val) {
+                        setState(() {
+                          pushNotifications = val;
+                        });
+                      },
+                      activeThumbColor: Colors.black,
+                    ),
+                    onTap: () {
                       setState(() {
-                        pushNotifications = val;
+                        pushNotifications = !pushNotifications;
                       });
+                      if (widget.onNotificationPrefsTap != null) {
+                        widget.onNotificationPrefsTap!();
+                      }
                     },
-                    activeColor: Colors.black,
                   ),
-                  onTap: () {
-                    setState(() {
-                      pushNotifications = !pushNotifications;
-                    });
-                    if (widget.onNotificationPrefsTap != null) {
-                      widget.onNotificationPrefsTap!();
-                    }
-                  },
-                ),
-                const Divider(height: 1),
-                ListTile(
-                  leading: const Icon(Icons.email),
-                  title: const Text("Email Notifications"),
-                  trailing: Switch(
-                    value: emailNotifications,
-                    onChanged: (val) {
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.email),
+                    title: const Text("Email Notifications"),
+                    trailing: Switch(
+                      value: emailNotifications,
+                      onChanged: (val) {
+                        setState(() {
+                          emailNotifications = val;
+                        });
+                      },
+                      activeThumbColor: Colors.black,
+                    ),
+                    onTap: () {
                       setState(() {
-                        emailNotifications = val;
+                        emailNotifications = !emailNotifications;
                       });
+                      if (widget.onEmailNotificationTap != null) {
+                        widget.onEmailNotificationTap!();
+                      }
                     },
-                    activeColor: Colors.black,
                   ),
-                  onTap: () {
-                    setState(() {
-                      emailNotifications = !emailNotifications;
-                    });
-                    if (widget.onEmailNotificationTap != null) {
-                      widget.onEmailNotificationTap!();
-                    }
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 24),
 
           // Appearance Section
           const _SectionTitle(title: "Appearance"),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade300, width: 2),
+              borderRadius: BorderRadius.circular(16),
             ),
-            elevation: 3,
-            child: ListTile(
-              leading: const Icon(Icons.palette),
-              title: const Text("Theme"),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: widget.onThemeTap ?? () {},
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(Icons.palette),
+                title: const Text("Theme"),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: widget.onThemeTap ?? () {},
+              ),
             ),
           ),
           const SizedBox(height: 24),
 
           // About Section
           const _SectionTitle(title: "About"),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade300, width: 2),
+              borderRadius: BorderRadius.circular(16),
             ),
-            elevation: 3,
-            child: ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text("App Version"),
-              trailing: const Text(
-                "v1.0.0",
-                style: TextStyle(color: Colors.grey),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              onTap: widget.onAppVersionTap ?? () {},
+              elevation: 0,
+              child: ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text("App Version"),
+                trailing: const Text(
+                  "v1.0.0",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                onTap: widget.onAppVersionTap ?? () {},
+              ),
             ),
           ),
           const SizedBox(height: 24),

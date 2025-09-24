@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sms_app/welcome_screen.dart';
+import 'package:sms_app/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const WelcomeScreen(),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
