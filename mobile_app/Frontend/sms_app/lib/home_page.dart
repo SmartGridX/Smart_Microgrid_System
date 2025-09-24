@@ -8,6 +8,11 @@ import 'package:sms_app/widgets/bottom_nav.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
+// Importing individual tabs
+import 'package:sms_app/tab-contents/analytics_tab.dart';
+import 'package:sms_app/tab-contents/grid_tab.dart';
+import 'package:sms_app/tab-contents/alerts_tab.dart';
+
 // Custom FeatureCard widget
 
 class HomePage extends StatefulWidget {
@@ -28,13 +33,13 @@ class _HomePageState extends State<HomePage> {
         body = _homeContent(context);
         break;
       case 1:
-        body = _analyticsContent();
+        body = const AnalyticsTab(); // ✅ Moved to separate file
         break;
       case 2:
-        body = _gridContent();
+        body = const GridTab(); // ✅ Moved to separate file
         break;
       case 3:
-        body = _alertsContent();
+        body = const AlertsTab(); // ✅ Moved to separate file
         break;
       default:
         body = _homeContent(context);
@@ -433,10 +438,7 @@ Widget _buildDeviceDetails(List<Map<String, dynamic>> devices) {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Icon(
-                        device['icon'],
-                        size: 28,
-                      ),
+                      Icon(device['icon'], size: 28),
                     ],
                   ),
                   const SizedBox(height: 6),
@@ -445,7 +447,9 @@ Widget _buildDeviceDetails(List<Map<String, dynamic>> devices) {
                     style: TextStyle(
                       color: getDeviceStatus(device) == "Active"
                           ? Colors.green
-                          : (getDeviceStatus(device) == "Warning" ? Colors.orange : Colors.red),
+                          : (getDeviceStatus(device) == "Warning"
+                                ? Colors.orange
+                                : Colors.red),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -490,51 +494,10 @@ final devices = [
 String getDeviceStatus(Map device) {
   if ((device['Active Sensors'] ?? 0) == 0) {
     return "Inactive";
-  } else if ((device['Active Sensors'] ?? 0) < (device['Total Sensors'] ?? 1) / 2) {
+  } else if ((device['Active Sensors'] ?? 0) <
+      (device['Total Sensors'] ?? 1) / 2) {
     return "Warning";
   } else {
     return "Active";
   }
-}
-
-//! Bottom Navigation Tabs Content
-//! change this into another file later
-
-// Analytics tab content
-Widget _analyticsContent() {
-  return SafeArea(
-    child: Center(
-      child: Text(
-        "Analytics / Detailed Charts Placeholder",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
-    ),
-  );
-}
-
-// Alerts tab content
-Widget _alertsContent() {
-  return SafeArea(
-    child: Center(
-      child: Text(
-        "Alerts Placeholder",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
-    ),
-  );
-}
-
-// Grid tab content
-Widget _gridContent() {
-  return SafeArea(
-    child: Center(
-      child: Text(
-        "Grid Interaction Placeholder",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
-    ),
-  );
 }

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import './sidebar_widgets/my_profile.dart';
+import './sidebar_widgets/contact_us.dart';
+import './sidebar_widgets/settings.dart';
+import './sidebar_widgets/help_faqs.dart';
+import './sidebar_widgets/docs.dart';
+
 class ProfileSidebar extends StatelessWidget {
   final String username;
   final String profileImage;
@@ -52,11 +58,72 @@ class ProfileSidebar extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  _buildMenuItem(Icons.person, "My Profile"),
-                  _buildMenuItem(Icons.settings, "Settings"),
-                  _buildMenuItem(Icons.mail, "Contact Us"),
-                  _buildMenuItem(Icons.help_outline, "Help & FAQs"),
-                  _buildMenuItem(Icons.code, "Connect with Developers"),
+                  ListTile(
+                    leading: Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0)),
+                    title: const Text("My Profile"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                            username: username,
+                            profileImage: profileImage,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings, color: const Color.fromARGB(255, 0, 0, 0)),
+                    title: const Text("Settings"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.mail, color: const Color.fromARGB(255, 0, 0, 0)),
+                    title: const Text("Contact Us"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ContactUsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.help_outline,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    title: const Text("Help & FAQs"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HelpFaqsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.book, color: const Color.fromARGB(255, 0, 0, 0)),
+                    title: const Text("Documentation"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DocumentationPage(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -83,16 +150,6 @@ class ProfileSidebar extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildMenuItem(IconData icon, String label) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.green.shade600),
-      title: Text(label),
-      onTap: () {
-        debugPrint("$label tapped");
-      },
     );
   }
 }
