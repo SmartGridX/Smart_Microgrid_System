@@ -1,16 +1,50 @@
-# sms_app
+# Smart Microgrid System App
 
-A new Flutter project.
+A cross-platform Flutter application for monitoring and controlling smart microgrid systems in residential buildings.
+
+## Features
+
+- Real-time energy production and consumption dashboard
+- Peak demand tracking
+- Appliance control (lighting, AC, power usage)
+- User-friendly grid and card UI
+- Responsive design for mobile and web
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. **Clone the repository:**
 
-A few resources to get you started if this is your first Flutter project:
+   ```bash
+   git clone https://github.com/SmartGridX/Smart_Microgrid_System
+   ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. **Install dependencies:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app:**
+
+   ```bash
+   flutter run
+   ```
+
+## Folder Structure
+
+- `lib/` - Main app code
+- `lib/widgets/` - Reusable UI components
+- `android/`, `ios/`, `web/`, `linux/`, `macos/`, `windows/` - Platform-specific code
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Resources
+
+- [Flutter Documentation](https://docs.flutter.dev/)
+- [Dart Language](https://dart.dev/)

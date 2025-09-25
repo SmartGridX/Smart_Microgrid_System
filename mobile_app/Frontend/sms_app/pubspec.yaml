@@ -35,7 +35,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   google_fonts: ^6.3.1
+  syncfusion_flutter_charts: ^31.1.20
+  intl: ^0.20.2
+  flutter_svg: ^2.2.1
+  animate_do: ^3.3.4
+  http: ^1.2.3
+  fl_chart: ^0.65.0
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -88,3 +95,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  assets:
+    - assets/
