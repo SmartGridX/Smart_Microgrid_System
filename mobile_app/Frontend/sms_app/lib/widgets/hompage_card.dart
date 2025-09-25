@@ -29,6 +29,10 @@ class HompageCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
+        border: Border.all(
+          color: color.withAlpha((0.4 * 200).toInt()),
+          width: 2,
+        ),
         color: color.withAlpha((0.1 * 200).toInt()),
         borderRadius: BorderRadius.circular(12),
       ),

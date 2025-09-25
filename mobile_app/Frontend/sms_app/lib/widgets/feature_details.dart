@@ -101,20 +101,10 @@ class _BatteryPageState extends State<BatteryPage> {
             Row(
               children: [
                 Expanded(
-                  child: _healthCard(
-                    "Inverter Health",
-                    "Healthy",
-                    Colors.green,
-                  ),
+                  child: _healthCard("Invt Health", "Good", Colors.green),
                 ),
                 const SizedBox(width: 16),
-                Expanded(
-                  child: _healthCard(
-                    "Transformer Health",
-                    "Critical",
-                    Colors.red,
-                  ),
-                ),
+                Expanded(child: _healthCard("Trans", "Critical", Colors.red)),
               ],
             ),
 
@@ -170,22 +160,24 @@ Widget _notificationCard(String message) {
   );
 }
 
-Widget _healthCard(String title, String status, Color color) {
-  return Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: Colors.black12),
-    ),
-    child: Row(
-      children: [
-        CircleAvatar(radius: 8, backgroundColor: color),
-        const SizedBox(width: 8),
-        Text(
-          "$title: $status",
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ],
+Widget _healthCard(String title, String? status, Color color) {
+  return Expanded(
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.black12),
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(radius: 8, backgroundColor: color),
+          const SizedBox(width: 8),
+          Text(
+            "$title: $status",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     ),
   );
 }

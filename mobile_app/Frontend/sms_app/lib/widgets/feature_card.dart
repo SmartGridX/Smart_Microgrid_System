@@ -20,12 +20,12 @@ class FeatureCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 70,
-            height: 70,
+            width: MediaQuery.of(context).size.width * 0.18,
+            height: MediaQuery.of(context).size.width * 0.18,
             decoration: BoxDecoration(
               color: Colors.green.withAlpha((0.1 * 200).toInt()),
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.green.shade100),
+              border: Border.all(color: Colors.green.shade100, width: 2),
             ),
             child: Center(
               child: Icon(icon, size: 32, color: Colors.green.shade500),
