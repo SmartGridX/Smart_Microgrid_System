@@ -59,66 +59,65 @@ Base URL: `/`
 
 ### Auth Routes (`/auth`)
 
-POST /auth/register → Register a new user
-POST /auth/login    → Login and get JWT token
+- POST /auth/register → Register a new user
+- POST /auth/login    → Login and get JWT token
 
 
 ### Users Routes (`/users`) 🔒 Protected (JWT required, except registration)
 
-POST   /users/register →  Register a new user        
-GET    /users/me       →  Get current logged-in user 
-GET    /users/         →  List all users             
-GET    /users/{id}     →  Get user by ID             
-DELETE /users/{id}     →  Delete a user              
+- POST   /users/register →  Register a new user        
+- GET    /users/me       →  Get current logged-in user 
+- GET    /users/         →  List all users             
+- GET    /users/{id}     →  Get user by ID             
+- DELETE /users/{id}     →  Delete a user              
 
 
 ### Device Routes (`/devices`) 🔒 Protected (JWT required)
 
-GET     /devices/       →  List all devices         
-POST    /devices/       →  Add a new device         
-GET     /devices/{id}   →  Get device details by ID 
-PUT     /devices/{id}   →  Update device            
-DELETE  /devices/{id}   →  Delete device            
+- GET     /devices/       →  List all devices         
+- POST    /devices/       →  Add a new device         
+- GET     /devices/{id}   →  Get device details by ID 
+- PUT     /devices/{id}   →  Update device            
+- DELETE  /devices/{id}   →  Delete device            
 
 
 ### Analytics Routes (`/analytics`) 🔒 Protected (JWT required)
 
-GET  /analytics/summary      →  Get daily & monthly analytics       
-GET  /analytics/source/{id}  →  Get analytics by source             
-GET  /analytics/device/{id}  →  Get analytics by device             
-GET  /analytics/comparison   →  Compare multiple sources analytics  
+- GET  /analytics/summary      →  Get daily & monthly analytics       
+- GET  /analytics/source/{id}  →  Get analytics by source             
+- GET  /analytics/device/{id}  →  Get analytics by device             
+- GET  /analytics/comparison   →  Compare multiple sources analytics  
 
 
 ## Reading Routes (`/readings`) 🔒 Protected (JWT required)
 
-POST  /readings/                   →  Create a new reading              
-GET   /readings/                   →  List readings (with pagination)   
-GET   /readings/{id}               →  Get reading by ID                 
-GET   /readings/source/{source}    →  Get readings by source            
-GET   /readings/device/{device_id} →  Get readings by device            
-GET   /readings/date               →  Get readings by date range        
+- POST  /readings/                   →  Create a new reading              
+- GET   /readings/                   →  List readings (with pagination)   
+- GET   /readings/{id}               →  Get reading by ID                 
+- GET   /readings/source/{source}    →  Get readings by source            
+- GET   /readings/device/{device_id} →  Get readings by device            
+- GET   /readings/date               →  Get readings by date range        
 
 
 ### Reports & Alerts Routes 🔒 Protected (JWT required)
 
 #### Reports
 
-GET  /reports/generation   → Get total energy generation  
-GET  /reports/consumption  → Get total energy consumption 
+- GET  /reports/generation   → Get total energy generation  
+- GET  /reports/consumption  → Get total energy consumption 
 
 #### Alerts
-| Method | Endpoint     | Description            |
-|--------|--------------|------------------------|
-| GET    | /alerts/     | List all alerts        |
-| POST   | /alerts/     | Create a new alert     |
+
+- GET  /alerts/  →  List all alerts      
+- POST /alerts/  →  Create a new alert   
 
 
 ### Energy Sources Routes (`/sources`) 🔒 Protected (JWT required)
 
-GET     /sources/      →  List all energy sources  
-POST    /sources/      →  Add a new energy source  
-GET     /sources/{id}  →  Get source by ID         
-PUT     /sources/{id}  →  Update source            
-DELETE  /sources/{id}  →  Delete source            
+- GET     /sources/      →  List all energy sources  
+- POST    /sources/      →  Add a new energy source  
+- GET     /sources/{id}  →  Get source by ID         
+- PUT     /sources/{id}  →  Update source            
+- DELETE  /sources/{id}  →  Delete source            
 
 
