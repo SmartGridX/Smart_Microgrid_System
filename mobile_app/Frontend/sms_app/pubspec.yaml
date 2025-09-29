@@ -40,8 +40,9 @@ dependencies:
   flutter_svg: ^2.2.1
   animate_do: ^3.3.4
   http: ^1.2.3
-  fl_chart: ^0.65.0
+  fl_chart: ^1.1.1
   url_launcher: ^6.1.10
+  percent_indicator: ^4.2.5
   
 dev_dependencies:
   flutter_test:
